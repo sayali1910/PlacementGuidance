@@ -1,0 +1,350 @@
+<FlatButton@ButtonBehavior+Label>:
+    font_size:16
+
+<BeStartWindow>:
+    id: main_win
+    orientation: "vertical"
+    canvas.before:
+        Rectangle:
+            size:self.size
+            pos:self.pos
+            source:"C:\\Users\\Sayali\\Desktop\\Project\\Student\\bestart\\bestart1.jpeg"
+
+
+    BoxLayout:
+        id:top_nav
+        size_hint_y:None
+        height:30
+        canvas.before:
+            Color:
+                rgba:(0,0,0,1)
+            Rectangle:
+                size:self.size
+                pos:self.pos
+        FlatButton:
+            id:file_trigger
+            text:'file'
+            on_release:file_dropdown.open(self)
+            size_hint:(.1,None)
+            height:30
+            Widget:
+                on_parent:file_dropdown.dismiss()
+
+                DropDown:
+                    id:file_dropdown
+                    Button:
+                        id:close
+                        text:'Quit'
+                        size_hint_y:None
+                        height:30
+                        on_release:root.back()
+        Label:
+            text:"BE students Dashboard"
+            size_hint_x:.9
+            height:30
+            bold: True
+            size_hint_y: None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            
+    BoxLayout:
+        id: content_nav
+
+        BoxLayout:
+            id:nav_tab
+            size_hint_x:.2
+            orientation:'vertical'
+            spacing:3
+            canvas.before:
+                Color:
+                    rgba:(0,0,0,.7)
+                Rectangle:
+                    size:self.size
+                    pos:self.pos
+            ToggleButton:
+                id:post_toggle
+                text:'Post interview exp.'
+                #size_hint_y:.1
+                state:'down'
+                background_color:(0,0,0,0.7)
+                background_normal:""
+                group:'admin_navs'
+                on_state:root.change_screen(self)
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
+            ToggleButton:
+                id:analysis_toggle
+                text:'Company Analysis'
+                #size_hint_y:.1
+                background_color:(0,0,0,0.7)
+                background_normal:""
+                group:"admin_navs"
+                on_state:root.change_screen(self)
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
+            ToggleButton:
+                id:rpost_toggle
+                text:'Recent posts'
+                #size_hint_y:.1
+                background_color:(0,0,0,0.7)
+                background_normal:""
+                group:'admin_navs'
+                on_state:root.change_screen(self)
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
+            ToggleButton:
+                id:rque_toggle
+                text:'Recent Questions'
+                #size_hint_y:.1
+                background_color:(0,0,0,0.7)
+                background_normal:""
+                group:'admin_navs'
+                on_state:root.change_screen(self)
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
+            Label:
+                id:sp
+                text:''
+                size_hint_y:.7
+        BoxLayout:
+            id:all_content
+            size_hint_x:.8
+            padding:(20,10)
+            ScreenManager:
+                id:scrn_mngr
+                Screen:
+                    id:write_post_content
+                    name:'write_post_content'
+                    BoxLayout:
+                        orientation:'vertical'
+                        spacing:10
+                        BoxLayout:
+                            id:write_post_contents
+                        
+                            orientation: "vertical"
+                            ScrollView:
+                                GridLayout:
+                                    orientation: "vertical"
+                                    size_hint_y: None
+                                    height: self.minimum_height  #<<<<<<<<<<<<<<<<<<<<
+                                    row_default_height: 60
+                                    cols:1
+                                    BoxLayout:
+                                        size_hint_y:None
+                                        height:150
+                                        canvas.before:
+                                            Color:
+                                                rgba:(0,0,0,.5)
+                                            Rectangle:
+                                                size:self.size
+                                                pos:self.pos
+                                        Label:
+                                            text:"Post Your Experience"
+                                            size_hint_y: None
+                                            text_size: self.width, None
+                                            height: self.texture_size[1]
+                                            font_size:40
+                                            bold: True
+                                            size_hint_x:.9
+                                        FlatButton:
+                                            id:Login
+                                            text:"X"
+                                            size_hint_x:.1
+                                            #on_release:dropdown.open(self)
+                    
+                    
+                                    Label:
+                                        text:'User Name'
+                                        font_color:(1,1,1,1)
+                                        font_size:30
+                                        bcolor:(0,0,0,0.7)
+                                        size_hint_y: None
+                                        text_size: self.width, None
+                                        height: self.texture_size[1]
+                                        canvas.before:
+                                            Color:
+                                                rgba: self.bcolor
+                                            Rectangle:
+                                                pos: self.pos
+                                                size: self.size
+                                    TextInput:
+                                        id: name_field
+                                        hint_text:"User Name"
+                                        multiline: False
+                                        focus:True
+                                        #on_text_validate:pwd_field.focus=True
+                                    Label:
+                                        text:'Company Name'
+                                        font_color:(1,1,1,1)
+                                        font_size:30
+                                        bcolor:(0,0,0,0.7)
+                                        size_hint_y: None
+                                        text_size: self.width, None
+                                        height: self.texture_size[1]
+                                        canvas.before:
+                                            Color:
+                                                rgba: self.bcolor
+                                            Rectangle:
+                                                pos: self.pos
+                                                size: self.size
+                                    Label:
+                                        text:'Enter the name of the company for which you appeared for the interview'
+                                        size_hint_y: None
+                                        text_size: self.width, None
+                                        height: self.texture_size[1]
+                                        font_color:(1,1,1,1)
+                                        font_size:20
+                                        bcolor:(0,0,0,0.7)
+                                        canvas.before:
+                                            Color:
+                                                rgba: self.bcolor
+                                            Rectangle:
+                                                pos: self.pos
+                                                size: self.size
+                                    TextInput:
+                                        id: company_field
+                                        hint_text:"Company Name"
+                                        multiline: False
+                                        focus:True
+                                        #on_text_validate:pwd_field.focus=True
+                                    Label:
+                                        text:'Package of company'
+                                        font_color:(1,1,1,1)
+                                        font_size:30
+                                        bcolor:(0,0,0,0.7)
+                                        size_hint_y: None
+                                        text_size: self.width, None
+                                        height: self.texture_size[1]
+                                        canvas.before:
+                                            Color:
+                                                rgba: self.bcolor
+                                            Rectangle:
+                                                pos: self.pos
+                                                size: self.size
+                                    TextInput:
+                                        id: package_field
+                                        hint_text:"Package of Company Name , Ex.5 or 3.5"
+                                        multiline: False
+                                        focus:True
+                                        #on_text_validate:pwd_field.focus=True
+                                    GridLayout:
+                                        cols: 2
+                                        padding : 30,30
+                                        spacing: 20, 20
+                                        row_default_height: '30dp'
+                    
+                                        Label:
+                                            text: 'Selected'
+                                            font_size:20
+                                            valign: 'middle'
+                    
+                                        TextInput:
+                                            id: selected
+                                            hint_text:"Yes/No"
+                                            multiline: False
+                                            focus:True
+                                        Label:
+                                            text: 'Year'
+                                            font_size:20
+                                            valign: 'middle'
+                    
+                                        TextInput:
+                                            id: year
+                                            hint_text:"2019/2020"
+                                            multiline: False
+                                            focus:True
+                                        
+                                    Label:
+                                        id:sp
+                                        size_hint_y:None
+                                        height:70
+                                    Label:
+                                        text:'Post Your Experience Or IMP Questions'
+                                        font_color:(1,1,1,1)
+                                        font_size:30
+                                        bcolor:(0,0,0,0.7)
+                                        size_hint_y: None
+                                        text_size: self.width, None
+                                        height: self.texture_size[1]
+                                        canvas.before:
+                                            Color:
+                                                rgba: self.bcolor
+                                            Rectangle:
+                                                pos: self.pos
+                                                size: self.size
+                                    TextInput:
+                                        id: post_field
+                                        hint_text:"Write Here..."
+                                        focus:True
+                                        #on_text_validate:pwd_field.focus=True
+                                        size_hint_y:None
+                                        height:100
+                                    Label:
+                                        id:sp
+                                        size_hint_y:None
+                                        height:40
+                                    Button:
+                                        text:'Submit'
+                                        bold: True
+                                        font_size:30
+                                        background_color:(0,0,0,0.7)
+                                        background_normal:''
+                                        on_release:root.write_post()
+
+                Screen:
+                    id:scrn_post_content
+                    name:'scrn_post_content'
+                    BoxLayout:
+                        orientation:'vertical'
+                        spacing:10
+                        BoxLayout:
+                            id:scrn_post_contents
+                        BoxLayout:
+                            id:ops_feilds_p
+                            spacing:10
+                            size_hint_y:None
+                            height:35
+                        
+                Screen:
+                    id:scrn_que_content
+                    name:'scrn_que_content'
+                    BoxLayout:
+                        orientation:'vertical'
+                        spacing:10
+                        BoxLayout:
+                            id:scrn_que_contents
+                        BoxLayout:
+                            id:ops_feilds_q
+                            spacing:10
+                            size_hint_y:None
+                            height:35
+                        
+                
+                        
+                Screen:
+                    id:scrn_analysis
+                    name:'scrn_analysis'
+                    BoxLayout:
+                        orientation:'vertical'
+                        spacing:10
+                        BoxLayout:
+                            orientation:'vertical'
+                            size_hint_y:None
+                            height:45
+                            Spinner:
+                                id:target_company
+                                text:'Choose Company'
+                            Button:
+                                id:submit_analysis
+                                text:'View Stats'
+                                size_hint_x:.3
+                                on_release:root.view_stats()
+                        BoxLayout:
+                            id:analysis_res    
+                            
+                
+                    
